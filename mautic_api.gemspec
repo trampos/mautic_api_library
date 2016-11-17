@@ -6,11 +6,11 @@ require "mautic_api/version"
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "mautic_api"
-  s.version     = MauticApiLibrary::VERSION
+  s.version     = MauticApi::VERSION
   s.authors     = ["Marcel"]
   s.email       = ["marcel@trampos.co"]
   s.homepage    = "http://trampos.co"
-  s.summary     = "Ported from PHP (https://github.com/mautic/api-library). "
+  s.summary     = ""
   s.description = "This gem allows simple integration with Mautic Api."
   s.license     = "MIT"
 
