@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    mautic_api_library (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    oauth (0.5.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mautic_api_library!
+  oauth
+
+BUNDLED WITH
+   1.12.5
