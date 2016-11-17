@@ -1,11 +1,11 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "mautic_api_library/version"
+require "mautic_api/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "mautic_api_library"
+  s.name        = "mautic_api"
   s.version     = MauticApiLibrary::VERSION
   s.authors     = ["Marcel"]
   s.email       = ["marcel@trampos.co"]

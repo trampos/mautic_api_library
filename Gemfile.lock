@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mautic_api_library (0.0.1)
+    mautic_api (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -12,7 +12,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  mautic_api_library!
+  mautic_api!
   oauth
 
 BUNDLED WITH

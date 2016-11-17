@@ -14,3 +14,4 @@ gemspec
 # gem 'debugger'
 
 gem 'oauth'
+gem 'redis'
