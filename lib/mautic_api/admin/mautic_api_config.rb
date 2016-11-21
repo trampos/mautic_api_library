@@ -49,7 +49,8 @@ if defined?(ActiveAdmin)
         redis.set('mautic_api:app_key', params[:mautic_api][:key])
         redis.set('mautic_api:app_secret', params[:mautic_api][:secret])
         redis.set('mautic_api:access_token', "") # Reset token
-      
+        redis.set('mautic_api:access_token_secret', "") # Reset token
+
         redirect_to public_send("#{ActiveAdmin.application.default_namespace}_mautic_api_config_path"), notice: "key was set"
       rescue OAuth::Unauthorized
         redirect_to public_send("#{ActiveAdmin.application.default_namespace}_mautic_api_config_path"), notice: "Não autorizado."
@@ -87,7 +88,8 @@ if defined?(ActiveAdmin)
         })
       
         redis.set('mautic_api:access_token', access_token.token)
-      
+        redis.set('mautic_api:access_token_secret', access_token.secret)
+        
         redirect_to public_send("#{ActiveAdmin.application.default_namespace}_mautic_api_config_path"), notice: "token was set"
       rescue OAuth::Unauthorized
         redirect_to public_send("#{ActiveAdmin.application.default_namespace}_mautic_api_config_path"), notice: "Não autorizado."

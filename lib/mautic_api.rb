@@ -7,4 +7,5 @@
 require "mautic_api/engine"
 
 module MauticApi
+  
 end
