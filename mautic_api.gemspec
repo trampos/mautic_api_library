@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
   s.require_paths = ["lib"]
 
-  s.add_dependency "activeadmin", "1.0.0.pre"
-  s.add_dependency "oauth", ">= 0.3.6"
-  s.add_dependency "redis", ">= 2.1"
+  s.add_dependency "activeadmin"
+  s.add_dependency "oauth"
+  s.add_dependency "redis"
 end
