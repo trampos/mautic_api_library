@@ -11,10 +11,7 @@ module MauticApi
     end
     
     def consumer
-      url     = redis.get('mautic_api:url')
-      key     = redis.get('mautic_api:app_key')
-      secret  = redis.get('mautic_api:app_secret')
-      return OAuth::Consumer.new(key, secret, { :site => url })
+      return OAuth::Consumer.new(app_key, app_secret, { :site => base_url })
     end
     
     def access_token
@@ -25,12 +22,16 @@ module MauticApi
       return OAuth::AccessToken.from_hash(consumer, hash)
     end
     
-    def base_url
-      redis.get('mautic_api:url')
+    def app_key
+      redis.get('mautic_api:app_key')
     end
     
-    def access_token
-      redis.get('mautic_api:access_token')
+    def app_secret
+      redis.get('mautic_api:app_secret')
+    end
+    
+    def base_url
+      redis.get('mautic_api:url')
     end
       #
   #
