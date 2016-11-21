@@ -12,6 +12,3 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
-
-gem 'oauth'
-gem 'redis'
