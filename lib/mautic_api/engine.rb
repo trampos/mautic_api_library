@@ -1,3 +1,5 @@
+require "active_admin"
+
 module MauticApi
   class Engine < ::Rails::Engine
     isolate_namespace MauticApi

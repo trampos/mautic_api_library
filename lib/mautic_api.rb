@@ -6,6 +6,7 @@
 
 require "oauth"
 require "redis"
+require "mautic_api/engine"
 
 module MauticApi
 
