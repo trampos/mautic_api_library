@@ -1,0 +1,16 @@
+<%= form_for "mautic_api", url: public_send("#{ActiveAdmin.application.default_namespace}_mautic_api_config_auth_path") do |f| %>
+	
+	<%= f.text_field :url, value: @config[:url] %>
+	<%= f.text_field :key, value: @config[:key] %>
+	<%= f.text_field :secret, value: @config[:secret] %>
+	<%= f.submit %>
+	
+<% end %>
+
+<% if @config[:key].present? && @config[:secret].present? %>
+	<% if @config[:token].present? %>
+		Token set
+	<% else %>
+		<%= link_to "Set token", public_send("#{ActiveAdmin.application.default_namespace}_mautic_api_config_oauth_path"), method: :post %>
+	<% end %>
+<% end %>
