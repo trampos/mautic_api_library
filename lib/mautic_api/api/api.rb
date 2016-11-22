@@ -8,6 +8,14 @@ module MauticApi
     class << self
       attr_reader :endpoint, :base_api_endpoint
     end
+
+    def endpoint
+      self.class.endpoint
+    end
+    
+    def base_api_endpoint
+      self.class.base_api_endpoint
+    end
     
     def initialize access_token
       @access_token = access_token
