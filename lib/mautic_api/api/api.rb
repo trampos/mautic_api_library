@@ -98,7 +98,7 @@ module MauticApi
       args = ['search', 'start', 'limit', 'order_by', 'order_by_dir', 'published_only']
 
       args.each do |arg|
-        parameters[arg.to_sym] = (eval arg) if (eval arg).present?
+        parameters[arg] = (eval arg) if (eval arg).present?
       end
 
       return make_request(@@endpoint, parameters)
