@@ -47,7 +47,7 @@ module MauticApi
           
           return {
             error: {
-              code: reponse.code,
+              code: response.code,
               endpoint: "#{@@base_api_endpoint}/#{endpoint}",
               message: response
             }
