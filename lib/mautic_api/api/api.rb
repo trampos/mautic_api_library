@@ -13,6 +13,10 @@ module MauticApi
       self.class.endpoint
     end
     
+    def base_api_endpoint
+      self.class.base_api_endpoint
+    end
+    
     def action_not_supported action
       return {
         error: {
@@ -43,7 +47,7 @@ module MauticApi
             return {
               error: {
                 code: 403,
-                endpoint: "#{@base_api_endpoint}/#{endpoint}",
+                endpoint: "#{self.base_api_endpoint}/#{endpoint}",
                 message: message
               }
             }
@@ -52,7 +56,7 @@ module MauticApi
           return {
             error: {
               code: reponse.code,
-              endpoint: "#{@base_api_endpoint}/#{endpoint}",
+              endpoint: "#{self.base_api_endpoint}/#{endpoint}",
               message: response
             }
           }
@@ -63,7 +67,7 @@ module MauticApi
         return {
           error: {
             code: 500,
-            endpoint: "#{@base_api_endpoint}/#{endpoint}",
+            endpoint: "#{self.base_api_endpoint}/#{endpoint}",
             message: e.message
           }
         }
