@@ -25,7 +25,7 @@ module MauticApi
     def make_request endpoint, parameters = {}, method = :get
     
       begin
-        response = access_token.request(method, endpoint, parameters)
+        response = @access_token.request(method, endpoint, parameters)
         json = JSON.parse(response.body)
         
         if response.code != 200
@@ -52,7 +52,7 @@ module MauticApi
         
         return {
           error: {
-            code: e.code,
+            code: 500,
             message: e.message
           }
         }
