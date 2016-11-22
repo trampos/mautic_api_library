@@ -14,6 +14,54 @@ module MauticApi
       }
     end
     
+    # Make the API request
+    #
+    # @param string $endpoint
+    # @param array  $parameters
+    # @param string $method
+    #
+    # @return array|mixed
+    
+    def make_request endpoint, parameters = {}, method = :get
+    
+      begin
+        response = access_token.request(method, endpoint, parameters)
+        json = JSON.parse(response.body)
+        
+        if response.code != 200
+          
+          if json['error'].present? && json['error_description'].present?
+              message = "#{json['error']}: #{json['error_description']}"
+              return {
+                error: {
+                    code: 403,
+                    message: message
+                }
+              }
+          }
+          
+          return {
+            error: {
+                code: reponse.code,
+                message: response
+            }
+          }
+        end
+        
+      rescue Exception => e
+        
+        return {
+          error: {
+            code: e.code,
+            message: e.message
+          }
+        }
+        
+      end
+      
+      return json
+    end
+        
     # Get a single item
     #
     # @param int $id
@@ -70,8 +118,8 @@ module MauticApi
     #
     # @return array|mixed
     
-    def create attrs
-      return make_request("#{@endpoint}/new", attrs, 'POST')
+    def create parameters
+      return make_request("#{@endpoint}/new", parameters, :post)
     end
     
     # Edit an item with option to create if it doesn't exist
@@ -82,9 +130,9 @@ module MauticApi
     #
     # @return array|mixed
   
-    def edit(id, attrs, create_if_not_exists = false)
-      method = create_if_not_exists ? 'PUT' : 'PATCH'
-      return make_request("#{@endpoint}/#{id}/edit", attrs, method)
+    def edit(id, parameters, create_if_not_exists = false)
+      method = create_if_not_exists ? :put : :patch
+      return make_request("#{@endpoint}/#{id}/edit", parameters, method)
     end
 
     # Delete an item
@@ -94,7 +142,7 @@ module MauticApi
     # @return array|mixed
     
     def delete id
-      return make_request("#{@endpoint}/#{id}/delete", {}, 'DELETE')
+      return make_request("#{@endpoint}/#{id}/delete", {}, :delete)
     end
   }
 end
