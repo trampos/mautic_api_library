@@ -29,7 +29,7 @@ module MauticApi
     def make_request endpoint, parameters = {}, method = :get
     
       begin
-        response = @access_token.request(method, "/#{@@base_api_endpoint}/#{endpoint}", parameters)
+        response = @access_token.request(method, "/#{@@base_api_endpoint}/#{endpoint}", parameters.to_json)
         json = JSON.parse(response.body)
         
         if response.code.to_i != 200
@@ -77,7 +77,7 @@ module MauticApi
     # @returnarray|mixed
     
     def get id
-      return access_token.get("{@@endpoint}/#{id}")
+      return make_request.get("{@@endpoint}/#{id}")
     end
 
     # Get a list of items
@@ -98,7 +98,7 @@ module MauticApi
       args = ['search', 'start', 'limit', 'order_by', 'order_by_dir', 'published_only']
 
       args.each do |arg|
-        parameters[arg] = (eval arg) if (eval arg).present?
+        parameters[arg.to_sym] = (eval arg) if (eval arg).present?
       end
 
       return make_request(@@endpoint, parameters)
