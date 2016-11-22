@@ -32,7 +32,7 @@ module MauticApi
         response = @access_token.request(method, "/#{@@base_api_endpoint}/#{endpoint}", parameters)
         json = JSON.parse(response.body)
         
-        if response.code != 200
+        if response.code.to_i != 200
           
           if json['error'].present? && json['error_description'].present?
             message = "#{json['error']}: #{json['error_description']}"
