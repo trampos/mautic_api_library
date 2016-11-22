@@ -29,7 +29,7 @@ module MauticApi
     def make_request endpoint, parameters = {}, method = :get
     
       begin
-        response = @access_token.request(method, "#{@@base_api_endpoint}/#{endpoint}", parameters)
+        response = @access_token.request(method, "/#{@@base_api_endpoint}/#{endpoint}", parameters)
         json = JSON.parse(response.body)
         
         if response.code != 200
@@ -61,7 +61,7 @@ module MauticApi
             code: 500,
             endpoint: "#{@@base_api_endpoint}/#{endpoint}",
             message: e.message,
-            backtrace: e.backtrace.join("\n")
+            backtrace: e.backtrace.join("\n")  
           }
         }
         
