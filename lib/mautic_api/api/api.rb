@@ -36,16 +36,18 @@ module MauticApi
             message = "#{json['error']}: #{json['error_description']}"
             return {
               error: {
-                  code: 403,
-                  message: message
+                code: 403,
+                endpoint: "#{@base_api_endpoint}/#{endpoint}",
+                message: message
               }
             }
           end
           
           return {
             error: {
-                code: reponse.code,
-                message: response
+              code: reponse.code,
+              endpoint: "#{@base_api_endpoint}/#{endpoint}",
+              message: response
             }
           }
         end
@@ -55,6 +57,7 @@ module MauticApi
         return {
           error: {
             code: 500,
+            endpoint: "#{@base_api_endpoint}/#{endpoint}",
             message: e.message
           }
         }
@@ -92,7 +95,7 @@ module MauticApi
       args = ['search', 'start', 'limit', 'order_by', 'order_by_dir', 'published_only']
 
       args.each do |arg|
-        parameters[arg.to_sym] = (eval arg) unless (eval arg).empty?
+        parameters[arg.to_sym] = (eval arg) if (eval arg).present?
       end
 
       return make_request(@endpoint, parameters)

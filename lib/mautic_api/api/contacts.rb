@@ -46,7 +46,7 @@ module MauticApi
       args = ['search', 'start', 'limit', 'orderBy', 'order_by_dir']
 
       args.each do |arg|
-        parameters[arg.to_sym] = (eval arg) unless (eval arg).empty?
+        parameters[arg.to_sym] = (eval arg) if (eval arg).present?
       end
     
       return make_request("#{@endpoint}/#{id}/notes", parameters)
