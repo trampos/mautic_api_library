@@ -2,21 +2,9 @@ module MauticApi
   
   class Api
     
-    @endpoint = ''
-    @base_api_endpoint = 'api'
-    
-    class << self
-      attr_reader :endpoint, :base_api_endpoint
-    end
+    @@endpoint = ''
+    @@base_api_endpoint = 'api'
 
-    def endpoint
-      self.class.endpoint
-    end
-    
-    def base_api_endpoint
-      self.class.base_api_endpoint
-    end
-    
     def initialize access_token
       @access_token = access_token
     end
@@ -41,7 +29,7 @@ module MauticApi
     def make_request endpoint, parameters = {}, method = :get
     
       begin
-        response = @access_token.request(method, "#{self.base_api_endpoint}/#{endpoint}", parameters)
+        response = @access_token.request(method, "#{@@base_api_endpoint}/#{endpoint}", parameters)
         json = JSON.parse(response.body)
         
         if response.code != 200
@@ -51,7 +39,7 @@ module MauticApi
             return {
               error: {
                 code: 403,
-                endpoint: "#{self.base_api_endpoint}/#{endpoint}",
+                endpoint: "#{@@base_api_endpoint}/#{endpoint}",
                 message: message
               }
             }
@@ -60,7 +48,7 @@ module MauticApi
           return {
             error: {
               code: reponse.code,
-              endpoint: "#{self.base_api_endpoint}/#{endpoint}",
+              endpoint: "#{@@base_api_endpoint}/#{endpoint}",
               message: response
             }
           }
@@ -71,7 +59,7 @@ module MauticApi
         return {
           error: {
             code: 500,
-            endpoint: "#{self.base_api_endpoint}/#{endpoint}",
+            endpoint: "#{@@base_api_endpoint}/#{endpoint}",
             message: e.message
           }
         }
@@ -88,7 +76,7 @@ module MauticApi
     # @returnarray|mixed
     
     def get id
-      return access_token.get("{self.endpoint}/#{id}")
+      return access_token.get("{@@endpoint}/#{id}")
     end
 
     # Get a list of items
@@ -112,7 +100,7 @@ module MauticApi
         parameters[arg.to_sym] = (eval arg) if (eval arg).present?
       end
 
-      return make_request(self.endpoint, parameters)
+      return make_request(@@endpoint, parameters)
     end
 
     
@@ -138,7 +126,7 @@ module MauticApi
     # @return array|mixed
     
     def create parameters
-      return make_request("#{self.endpoint}/new", parameters, :post)
+      return make_request("#{@@endpoint}/new", parameters, :post)
     end
     
     # Edit an item with option to create if it doesn't exist
@@ -151,7 +139,7 @@ module MauticApi
   
     def edit(id, parameters, create_if_not_exists = false)
       method = create_if_not_exists ? :put : :patch
-      return make_request("#{self.endpoint}/#{id}/edit", parameters, method)
+      return make_request("#{@@endpoint}/#{id}/edit", parameters, method)
     end
 
     # Delete an item
@@ -161,7 +149,7 @@ module MauticApi
     # @return array|mixed
     
     def delete id
-      return make_request("#{self.endpoint}/#{id}/delete", {}, :delete)
+      return make_request("#{@@endpoint}/#{id}/delete", {}, :delete)
     end
   
   end
