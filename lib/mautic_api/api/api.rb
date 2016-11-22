@@ -60,7 +60,8 @@ module MauticApi
           error: {
             code: 500,
             endpoint: "#{@@base_api_endpoint}/#{endpoint}",
-            message: e.message
+            message: e.message,
+            backtrace: e.backtrace.join("\n")
           }
         }
         
