@@ -87,7 +87,7 @@ module MauticApi
       
       parameters = {}
       
-      args = ['search', 'start', 'limit', 'orderBy', 'orderByDir', 'publishedOnly']
+      args = ['search', 'start', 'limit', 'order_by', 'order_by_dir', 'published_only']
 
       args.each do |arg|
         parameters[arg.to_sym] = (eval arg) unless (eval arg).empty?
