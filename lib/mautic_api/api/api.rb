@@ -1,6 +1,8 @@
 module MauticApi
   class Api
-  
+    
+    @base_api_endpoint = 'api'
+    
     def initialize access_token
       @access_token = access_token
     end
@@ -25,7 +27,7 @@ module MauticApi
     def make_request endpoint, parameters = {}, method = :get
     
       begin
-        response = @access_token.request(method, endpoint, parameters)
+        response = @access_token.request(method, "#{@base_api_endpoint}/#{endpoint}", parameters)
         json = JSON.parse(response.body)
         
         if response.code != 200
