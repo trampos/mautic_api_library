@@ -31,14 +31,14 @@ module MauticApi
         if response.code != 200
           
           if json['error'].present? && json['error_description'].present?
-              message = "#{json['error']}: #{json['error_description']}"
-              return {
-                error: {
-                    code: 403,
-                    message: message
-                }
+            message = "#{json['error']}: #{json['error_description']}"
+            return {
+              error: {
+                  code: 403,
+                  message: message
               }
-          }
+            }
+          end
           
           return {
             error: {
@@ -144,5 +144,7 @@ module MauticApi
     def delete id
       return make_request("#{@endpoint}/#{id}/delete", {}, :delete)
     end
-  }
+  
+  end
+  
 end
