@@ -1,11 +1,18 @@
 module MauticApi
-  class ContextNotFoundException < StandardError
+  
+  module Exception
     
-    attr_reader :code
+    class ContextNotFoundException < StandardError
     
-    def initialize data = 'Context not found.', code = 500
-      @data = data
-      @code = code
+      attr_reader :code
+    
+      def initialize data = 'Context not found.', code = 500
+        @data = data
+        @code = code
+      end
+      
     end
+    
   end
+  
 end
