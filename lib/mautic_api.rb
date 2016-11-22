@@ -8,15 +8,9 @@ require "mautic_api/engine"
 
 module MauticApi
   
-  autoload :Api,               'mautic_api/api'
-  
-  module Api
-    autoload :Contacts,          'mautic_api/api/contacts'
-  end
-  
-  module Exception
-    autoload :ContextNotFoundException,          'mautic_api/exception/context_not_found_exception'
-  end
+  autoload :Api,                            'mautic_api/api/api'
+  autoload :Contacts,                       'mautic_api/api/contacts'
+  autoload :ContextNotFoundException,       'mautic_api/exception/context_not_found_exception'
 
   class Context
     
