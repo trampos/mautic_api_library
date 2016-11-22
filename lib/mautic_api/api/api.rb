@@ -5,18 +5,14 @@ module MauticApi
     @endpoint = ''
     @base_api_endpoint = 'api'
     
+    class << self
+      attr_reader :endpoint, :base_api_endpoint
+    end
+    
     def initialize access_token
       @access_token = access_token
     end
-    
-    def endpoint
-      self.class.endpoint
-    end
-    
-    def base_api_endpoint
-      self.class.base_api_endpoint
-    end
-    
+
     def action_not_supported action
       return {
         error: {
