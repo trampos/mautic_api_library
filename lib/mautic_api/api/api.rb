@@ -29,7 +29,13 @@ module MauticApi
     def make_request endpoint, parameters = {}, method = :get
     
       begin
-        response = @access_token.request(method, "/#{@@base_api_endpoint}/#{endpoint}", parameters.to_json)
+        
+        if method == :get
+          response = @access_token.request(method, "/#{@@base_api_endpoint}/#{endpoint}?#{parameters.to_query}")
+        else
+          response = @access_token.request(method, "/#{@@base_api_endpoint}/#{endpoint}", parameters.as_json)
+        end
+        
         json = JSON.parse(response.body)
         
         if response.code.to_i != 200
