@@ -83,7 +83,7 @@ module MauticApi
     # @returnarray|mixed
     
     def get id
-      return make_request("{@@endpoint}/#{id}")
+      return make_request("#{@@endpoint}/#{id}")
     end
 
     # Get a list of items
