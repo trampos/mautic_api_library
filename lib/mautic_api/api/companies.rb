@@ -1,6 +1,6 @@
 module MauticApi
 
-  class Contacts < Api
+  class Companies < Api
     
     @@endpoint = 'companies'
     

@@ -10,6 +10,7 @@ module MauticApi
   
   autoload :Api,                            'mautic_api/api/api'
   autoload :Contacts,                       'mautic_api/api/contacts'
+  autoload :Companies,                      'mautic_api/api/companies'
   autoload :ContextNotFoundException,       'mautic_api/exception/context_not_found_exception'
 
   class Context
