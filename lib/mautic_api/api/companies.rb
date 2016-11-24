@@ -2,7 +2,7 @@ module MauticApi
 
   class Companies < Api
     
-    @@endpoint = 'companies'
+    @endpoint = 'companies'
     
   end
   
