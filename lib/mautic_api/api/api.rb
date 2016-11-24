@@ -2,19 +2,15 @@ module MauticApi
   
   class Api
     
-    @endpoint = ''
-    @base_api_endpoint = 'api'
-    
-    class << self
-      attr_reader :endpoint, :base_api_endpoint
-    end
+    ENDPOINT = ''
+    BASE_API_ENDPOINT = 'api'
 
     def endpoint
-      self.class.endpoint
+      self.class::ENDPOINT
     end
     
     def base_api_endpoint
-      self.class.base_api_endpoint
+      self.class::BASE_API_ENDPOINT
     end
     
     def initialize access_token

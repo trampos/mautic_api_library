@@ -2,7 +2,7 @@ module MauticApi
 
   class Contacts < Api
 
-    @endpoint = 'contacts'
+    ENDPOINT = 'contacts'
   
     # Get a list of users available as contact owners
     #
