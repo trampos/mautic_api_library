@@ -11,7 +11,7 @@ module MauticApi
     #
     # @return array|mixed
     
-    def addContact id, contact_id
+    def add_contact id, contact_id
       return make_request("#{self.endpoint}/#{id}/contact/add/#{contact_id}", {}, :post)
     end
 
@@ -22,7 +22,7 @@ module MauticApi
     #
     # @return array|mixed
     
-    def removeContact id, contact_id
+    def remove_contact id, contact_id
       return make_request("#{self.endpoint}/#{id}/contact/remove/#{contact_id}", {}, :post)
     end
 
