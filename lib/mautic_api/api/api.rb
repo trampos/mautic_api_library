@@ -46,7 +46,7 @@ module MauticApi
         
         json = JSON.parse(response.body)
         
-        unless response.is_a?(Hash) 
+        unless json.is_a?(Hash) 
           return {
             error: {
               code: 500,
