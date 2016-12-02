@@ -46,27 +46,28 @@ module MauticApi
         
         json = JSON.parse(response.body)
         
-        if response.code.to_i != 200
-          
-          if json['error'].present? && json['error_description'].present?
-            message = "#{json['error']}: #{json['error_description']}"
-            return {
-              error: {
-                code: 403,
-                endpoint: "#{self.base_api_endpoint}/#{endpoint}",
-                message: message
-              }
-            }
-          end
-          
+        unless response.is_a?(Hash) 
           return {
             error: {
-              code: response.code,
+              code: 500,
               endpoint: "#{self.base_api_endpoint}/#{endpoint}",
               message: response
             }
           }
         end
+          
+        if json['error'].present? && json['error_description'].present?
+          message = "#{json['error']}: #{json['error_description']}"
+          return {
+            error: {
+              code: 403,
+              endpoint: "#{self.base_api_endpoint}/#{endpoint}",
+              message: message
+            }
+          }
+        end
+        
+        return json
         
       rescue Exception => e
         
@@ -81,7 +82,6 @@ module MauticApi
         
       end
       
-      return json
     end
         
     # Get a single item
