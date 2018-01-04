@@ -64,15 +64,14 @@ module MauticApi
     # Add do not contact to lead
     #
     # @param int    $id Contact ID
-    # @param string $reason
     # @param string $comments
     #
     # @return array|mixed
 
-    def add_do_not_contact id, comments = ''
+    def add_do_not_contact id, reason = 1, comments = ''
       parameters = {}
 
-      args = ['comments']
+      args = ['reason', 'comments']
 
       args.each do |arg|
         parameters[arg.to_sym] = (eval arg) if (eval arg).present?
