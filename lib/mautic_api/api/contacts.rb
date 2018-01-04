@@ -69,16 +69,16 @@ module MauticApi
     #
     # @return array|mixed
 
-    def add_do_not_contact id, reason = '', comments = ''
+    def add_do_not_contact id, comments = ''
       parameters = {}
 
-      args = ['reason', 'comments']
+      args = ['comments']
 
       args.each do |arg|
         parameters[arg.to_sym] = (eval arg) if (eval arg).present?
       end
 
-      return make_request("#{self.endpoint}/#{id}/dnc/add/email", parameters)
+      return make_request("#{self.endpoint}/#{id}/dnc/add/email", parameters, :post)
     end
 
     # Get a segment of campaigns the lead is in
