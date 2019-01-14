@@ -129,7 +129,7 @@ module MauticApi
     #
     # @return array|mixed
     
-    def get_published_list search = '', start = 0, limit = 0, order_by = '', order_by_dir = 'ASC'
+    def get_published_list search = '', start = nil, limit = nil, order_by = nil, order_by_dir = nil
       return get_list(search, start, limit, order_by, order_by_dir, true)
     end
 
