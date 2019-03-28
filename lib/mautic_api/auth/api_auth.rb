@@ -7,11 +7,11 @@
  #
  # @license     GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
 
- module MauticApi::Auth
+module MauticApi::Auth
   
 #         # OAuth Client modified from https://code.google.com/p/simple-php-oauth/
 
-#         class ApiAuth
+    class ApiAuth
         
 #             # Get an API Auth object
 #             #
@@ -53,5 +53,5 @@
 
 #                 return auth_object
 #             end
-    # end
+    end
 end

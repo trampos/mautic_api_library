@@ -7,6 +7,8 @@
 require "mautic_api/engine"
 
 module MauticApi
+    
+    autoload :Auth, 'mautic_api/auth/auth'
 
     class Context
         

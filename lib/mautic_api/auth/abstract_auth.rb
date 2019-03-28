@@ -254,5 +254,5 @@ module MauticApi::Auth
 #     self._curlTimeout = $timeout
 # }
 
-end
+    end
 end
