@@ -19,7 +19,11 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   # s.add_dependency "activeadmin"
-  # s.add_dependency "oauth"
+  # s.add_dependency "oauth2", "~> 1.0.0"
+  # s.add_dependency "jwt", "~> 1.0.0"
+  # s.add_dependency "multi_json", "~> 1.12.1"
+  # s.add_dependency "multi_xml", "~> 0.5.5"
+  # s.add_dependency "rack", "~> 1.5.5"
   # s.add_dependency "redis"
   
 end

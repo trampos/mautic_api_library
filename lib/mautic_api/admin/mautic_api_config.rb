@@ -25,16 +25,15 @@ if defined?(ActiveAdmin)
         @redis ||= Redis.new
       end
       
-      def consumer
+      def client
         url     = redis.get('mautic_api:url')
         key     = redis.get('mautic_api:app_key')
         secret  = redis.get('mautic_api:app_secret')
         
-        return OAuth::Consumer.new(key, secret, {
-          :site => url,
-          :request_token_path => '/oauth/v1/request_token',
-          :authorize_path     => '/oauth/v1/authorize',
-          :access_token_path  => '/oauth/v1/access_token'
+        return OAuth2::Client.new(key, secret, {
+          :site           => url,
+          :token_url      => '/oauth/v2/token',
+          :authorize_url  => '/oauth/v2/authorize'
         })
       end
       
@@ -59,7 +58,7 @@ if defined?(ActiveAdmin)
     
     page_action :oauth, method: :post do
       begin
-        @request_token = consumer.get_request_token(:oauth_callback => callback_url)
+        @request_token = client.get_request_token(:oauth_callback => callback_url)
 
         redis.set('mautic_api:oauth_token', @request_token.token)
         redis.set('mautic_api:oauth_token_secret', @request_token.secret)
@@ -81,7 +80,7 @@ if defined?(ActiveAdmin)
           oauth_token_secret: oauth_token_secret
         }
       
-        request_token  = OAuth::RequestToken.from_hash(consumer, hash)
+        request_token  = OAuth::RequestToken.from_hash(client, hash)
         access_token = request_token.get_access_token({
           oauth_verifier: params[:oauth_verifier],
           oauth_callback: callback_url
