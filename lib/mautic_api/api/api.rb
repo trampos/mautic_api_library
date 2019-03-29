@@ -56,9 +56,9 @@ module MauticApi
         # @return array
         # @throws \Exception
 
-        def make_request endpoint, parameters = {}, method = :get
+        def make_request endpoint, parameters = {}, method = :get, settings = {}
             
-            response = []
+            response = {}
 
             # Validate if this endpoint has a BC url
             bc_endpoint = nil
@@ -115,14 +115,14 @@ module MauticApi
                         
                         # TODO: $this->getLogger()->debug('API Response', array('response' => $response))
                         
-                        if !response.kind_of?(Array)
+                        if response[:code] >= 300
                             
                             # TODO: $this->getLogger()->warning($response)
                             # assume an error
                             
                             error = {
                                 code: 500,
-                                message: response
+                                message: response[:body]
                             }
                         end
 
@@ -131,33 +131,31 @@ module MauticApi
 
                         error = {
                             code: 500,
-                            message: e.to_s
+                            message: e
                         }
                     end
                 end
 
                 if error.present?
                     return { errors: [error] }
-                elsif response['errors'].present?
-                    # TODO: $this->getLogger()->error('Mautic API returned errors: '.var_export($response['errors'], true))
                 end
                 
                 # Ensure a code is present in the error array
-                if response['errors'].present?
-                    info = @auth.get_response_info
-                    response['errors'].each do |key, error|
-                        if response['errors'][key]['code']
-                            response['errors'][key]['code'] = info['http_code']
-                        end
-                    end
-                end
+                # if response[:errors].present?
+                #     info = @auth.get_response_info
+                #     response[:errors].each do |key, error|
+                #         if response[:errors][key]['code']
+                #             response[:errors][key]['code'] = info['http_code']
+                #         end
+                #     end
+                # end
             end
 
             # Check for a 404 code and a BC URL then try again if applicable
-            if bc_endpoint && (@bc_testing || (response['errors'][0]['code'].to_i === 404))
-                @bc_attempt = true
-                return self.make_request(bc_endpoint, parameters, method)
-            end
+            # if bc_endpoint && (@bc_testing || (response['errors'][0]['code'].to_i === 404))
+            #     @bc_attempt = true
+            #     return self.make_request(bc_endpoint, parameters, method)
+            # end
 
             return response
         end

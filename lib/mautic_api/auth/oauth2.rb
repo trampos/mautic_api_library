@@ -12,6 +12,10 @@ module MauticApi::Auth
 
         attr_accessor :access_token, :response_info
 
+        def initialize access_token, parameters={}
+            self.access_token = access_token
+        end
+
         def is_authorized
             #Check for existing access token
             return self.access_token && !self.access_token.expired?
@@ -30,23 +34,29 @@ module MauticApi::Auth
         #
         # @return array
 
-        def make_request url, parameters = {}, method = :get, &block
+        def make_request url, parameters = {}, method = :get, settings = {}, &block
+            
             case method
             when :get
-                self.response_info = self.access_token.get(url, parameters, &block)
+                self.response_info = self.access_token.get(url, :params => parameters, &block)
             when :post
-                self.response_info = self.access_token.post(url, parameters, &block)
+                self.response_info = self.access_token.post(url, :body => parameters, &block)
             when :put
-                self.response_info = self.access_token.put(url, parameters, &block)
+                self.response_info = self.access_token.put(url, :body => parameters, &block)
             when :patch
-                self.response_info = self.access_token.patch(url, parameters, &block)
+                self.response_info = self.access_token.patch(url, :body => parameters, &block)
             when :delete
-                self.response_info = self.access_token.delete(url, parameters, &block)
+                self.response_info = self.access_token.delete(url, :body => parameters, &block)
             end
-        end
 
-        def setup access_token
-            self.access_token = access_token
+            return {
+                url: url,
+                method: method,
+                parameters: parameters,
+                settings: settings,
+                code: self.response_info.status,
+                body: self.response_info.parsed
+            }
         end
     end
 end
