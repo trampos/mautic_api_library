@@ -1,21 +1,17 @@
 PATH
   remote: .
   specs:
-    mautic_api (0.0.1)
+    mautic_api (1.0.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    oauth (0.5.1)
-    redis (3.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   mautic_api!
-  oauth
-  redis
 
 BUNDLED WITH
-   1.12.5
+   1.16.1

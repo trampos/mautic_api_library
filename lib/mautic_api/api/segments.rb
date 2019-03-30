@@ -2,8 +2,10 @@ module MauticApi
 
   class Segments < Api
     
-    ENDPOINT = 'segments'
-
+    ENDPOINT = "segments"
+    LIST_NAME = "segments"
+    ITEM_NAME = "segment"
+    
     # Add a contact to the segment
     #
     # @param int $id      Segment ID
