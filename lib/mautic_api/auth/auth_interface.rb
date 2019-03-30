@@ -13,10 +13,6 @@ module MauticApi::Auth
             raise 'not implemented'
         end
 
-        def setup
-            raise 'not implemented'
-        end
-
         # Make a request to server using the supported auth method
         #
         # @param string $url

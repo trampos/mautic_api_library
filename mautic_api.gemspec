@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
   s.require_paths = ["lib"]
   
-  # s.add_dependency "activeadmin"
   # s.add_dependency "oauth2", "~> 1.0.0"
   # s.add_dependency "jwt", "~> 1.0.0"
   # s.add_dependency "multi_json", "~> 1.12.1"
