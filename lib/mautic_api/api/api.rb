@@ -121,8 +121,9 @@ module MauticApi
                             # assume an error
                             
                             error = {
-                                code: 500,
-                                message: response[:body]
+                                code: response[:code],
+                                message: response[:body],
+                                response: response
                             }
                         end
 
