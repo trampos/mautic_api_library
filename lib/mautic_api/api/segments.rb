@@ -14,7 +14,7 @@ module MauticApi
     # @return array|mixed
     
     def add_contact id, contact_id
-      return make_request("#{self.endpoint}/#{id}/contact/add/#{contact_id}", {}, :post)
+      return make_request("#{self.endpoint}/#{id}/contact/#{contact_id}/add", {}, :post)
     end
 
     # Remove a contact from the segment
@@ -25,7 +25,7 @@ module MauticApi
     # @return array|mixed
     
     def remove_contact id, contact_id
-      return make_request("#{self.endpoint}/#{id}/contact/remove/#{contact_id}", {}, :post)
+      return make_request("#{self.endpoint}/#{id}/contact/#{contact_id}/remove", {}, :post)
     end
 
   end
